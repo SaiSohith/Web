@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style src="canvas.css"></style>
 </head>
 <body>
-    <!-- <label>Image File:</label>
-<br/>
-<input type="file" id="imageLoader" name="imageLoader" />
-<canvas id="imageCanvas"></canvas> -->
-<label>Image File:</label>
-<br/>
-<input type="file" id="imageLoader" name="imageLoader" />
+    <canvas id="canvas"></canvas>
+
+    <button onclick="Restore()">Undo</button>
+    <button onclick="Clear()">Clear</button>
+    
+    <div onclick="change_color(this)" style="background:red" class="stroke-color"></div>
+    <div onclick="change_color(this)" style="background:blue" class="stroke-color"></div>
+    <input type="color" oninput="stroke_color = this.value" placeholder="Colors">
+    </div>
+    <input type="range" min="1" max="100" oninput="stroke_width = this.value">
+
+
+    <input type="file" id="imageLoader" name="imageLoader" />
 <canvas id="imageCanvas" ></canvas>
-<script src="func.js"></script>
+
+<button onclick="Save(this)">Model</button>
+    <script src="canvas.js"></script>
 </body>
 </html>
