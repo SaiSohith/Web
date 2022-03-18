@@ -98,6 +98,11 @@ function start(event) {
 function draw(event) {
   if (is_drawing) {
     context.lineTo(getX(event), getY(event));
+    console.log(getX(event));
+    let x=[]
+    x.push(getX(event))//array appending 
+    let y=[]
+    y.push(getY(event))//array appending
     context.strokeStyle = stroke_color;
     context.lineWidth = stroke_width;
     context.lineCap = "round";
