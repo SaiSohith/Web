@@ -173,6 +173,53 @@ function Save(a) {
     var link = document.createElement('a');
     link.download = 'filename.png';
     link.href = document.getElementById('canvas').toDataURL()
+
+    console.log(link.href)
+
+    // const csrfToken = getCookie('CSRF-TOKEN');
+    var x = document.getElementsByTagName("META");
+    var txt = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+      txt = txt+x[i].content;
+    }
+    const headers = new Headers({
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': txt
+    });
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Basic sohith');
+    headers.append('Origin','http://localhost:3000');
+    
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:8000/",
+      data: {
+             user_data: document.getElementById('canvas').toDataURL(),
+             csrfmiddlewaretoken: '{{ csrf_token }}'
+             },
+      success: function( data )
+      {
+      alert("Successful Added User to list");
+      }
+    });
+    fetch('http://127.0.0.1:8000/',{
+     
+      // Adding method type
+      method: "POST",
+      headers,
+      mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache',
+      // Adding body or contents to send
+      body: JSON.stringify({
+          data: document.getElementById('canvas').toDataURL()
+      }),
+       
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
     link.click();
   
 
