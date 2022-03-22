@@ -1,20 +1,10 @@
 let canvas = document.getElementById("canvas");
-// canvas.width = window.innerWidth - 60;
-// canvas.height = window.innerHeight * 0.6;
-
-
-
 
 let context = canvas.getContext("2d");
 
-// context.fillStyle = "white";
-// context.fillRect(0, 0, canvas.width, canvas.height);
-
 var imageLoader = document.getElementById('imageLoader');
 imageLoader.addEventListener('change', handleImage, false);
-// var canvas = document.getElementById('imageCanvas');
 var ctx = context
-
 
 function handleImage(e) {
 
@@ -45,35 +35,6 @@ var onImageLoad = function(img) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let restore_array = [];
 let start_index = -1;
 let stroke_color = 'black';
@@ -98,11 +59,11 @@ function start(event) {
 function draw(event) {
   if (is_drawing) {
     context.lineTo(getX(event), getY(event));
-    console.log(getX(event));
-    let x=[]
-    x.push(getX(event))//array appending 
-    let y=[]
-    y.push(getY(event))//array appending
+    // console.log(getX(event));
+    // let x=[]
+    // x.push(getX(event))//array appending 
+    // let y=[]
+    // y.push(getY(event))//array appending
     context.strokeStyle = stroke_color;
     context.lineWidth = stroke_width;
     context.lineCap = "round";
@@ -176,51 +137,55 @@ function Save(a) {
 
     console.log(link.href)
 
-    // const csrfToken = getCookie('CSRF-TOKEN');
-    var x = document.getElementsByTagName("META");
-    var txt = "";
-    var i;
-    for (i = 0; i < x.length; i++) {
-      txt = txt+x[i].content;
-    }
-    const headers = new Headers({
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': txt
-    });
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Basic sohith');
-    headers.append('Origin','http://localhost:3000');
     
-    $.ajax({
-      type: "POST",
-      url: "http://127.0.0.1:8000/",
-      data: {
-             user_data: document.getElementById('canvas').toDataURL(),
-             csrfmiddlewaretoken: '{{ csrf_token }}'
-             },
-      success: function( data )
-      {
-      alert("Successful Added User to list");
-      }
-    });
+    // const csrfToken = getCookie('CSRF-TOKEN');
+    // var x = document.getElementsByTagName("META");
+    // var txt = "";
+    // var i;
+    // for (i = 0; i < x.length; i++) {
+    //   txt = txt+x[i].content;
+    // }
+    // const headers = new Headers({
+    //     'Content-Type': 'application/json',
+    //     'X-CSRF-Token': txt
+    // });
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Accept', 'application/json');
+    // headers.append('Authorization', 'Basic sohith');
+    // headers.append('Origin','http://localhost:3000');
+    
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "http://127.0.0.1:8000/",
+  //     data: {
+  //            user_data: document.getElementById('canvas').toDataURL(),
+  //            csrfmiddlewaretoken: '{{ csrf_token }}'
+  //            },
+  //     success: function( data )
+  //     {
+  //     alert("Successful Added User to list");
+  //     }
+  //   });
     fetch('http://127.0.0.1:8000/',{
-     
       // Adding method type
       method: "POST",
-      headers,
-      mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache',
+    //   headers,
+    //   mode: 'cors', // no-cors, *cors, same-origin
+    // cache: 'no-cache',
       // Adding body or contents to send
       body: JSON.stringify({
-          data: document.getElementById('canvas').toDataURL()
+          d: document.getElementById('canvas').toDataURL()
+          
       }),
-       
       headers: {
           "Content-type": "application/json; charset=UTF-8"
       }
   })
-    link.click();
+  .then(response=>{
+    console.log(response.json());
+  })
+  
+    // link.click();
   
 
 //   window.location.href=image; 
